@@ -83,7 +83,7 @@ router.delete('/:id', auth, async (req, res) => {
 
         const todo = await todoModel.findOneAndDelete({ _id: todoId, userId })
         if (!todo) {
-            return res.status(401).json({ message: 'Todo not found' })
+            return res.status(404).json({ message: 'Todo not found' })
         }
 
         res.status(200).json({ message: 'Todo deleted successfully'})
@@ -99,7 +99,7 @@ router.delete('/', auth, async (req, res) => {
 
         const todo = await todoModel.deleteMany({ userId })
         if (!todo) {
-            return res.status(401).json({ message: 'Todo failed to delete'})
+            return res.status(409).json({ message: 'Todo failed to delete'})
         }
 
         res.status(200).json({ message: 'All Todo deleted successfully' })
