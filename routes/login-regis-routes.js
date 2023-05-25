@@ -34,17 +34,17 @@ router.post('/login', async (req, res) => {
 
         const user = userModel.findOne({ email })
         if (!user) {
-            return res.status(401).json({ message: 'User not found' })
+            return res.status(404).json({ message: 'User not found' })
         }
 
         const matchPassword = bcrypt.compare(password, user.password)
         if (!matchPassword) {
-            return res.status(401).json({ message: 'Password is wrong'})
+            return res.status(409).json({ message: 'Password is wrong'})
         }
         
         const token = jwt.sign({ userId: user._id}, process.env.TOKEN_SECRET)
 
-        res.status(201).json({ message: 'Successful Login', token })
+        res.status(200).json({ message: 'Successful Login', token })
 
     } catch (e) {
         res.status(500).json({ message: 'Internal server error' })
