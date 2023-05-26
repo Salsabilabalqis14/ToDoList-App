@@ -21,6 +21,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/users', loginRegisRoutes)
 app.use('/todos', todoRoutes)
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
     console.log('Server started on port 3000')
 })
