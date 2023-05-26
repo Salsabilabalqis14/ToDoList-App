@@ -1,8 +1,6 @@
 # ToDoList-App
 
-# API Spec
-
-## Authentication
+# API Documentation
 
 ## Create User
 
