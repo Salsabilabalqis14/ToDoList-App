@@ -18,8 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // routes
-app.use('/user', loginRegisRoutes)
-app.use('/todo', todoRoutes)
+app.use('/users', loginRegisRoutes)
+app.use('/todos', todoRoutes)
 
 app.listen(3000, () => {
     console.log('Server started on port 3000')
