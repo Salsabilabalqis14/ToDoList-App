@@ -32,17 +32,17 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body
 
-        const user = userModel.findOne({ email })
+        const user = await userModel.findOne({ email })
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
 
-        const matchPassword = bcrypt.compare(password, user.password)
+        const matchPassword = await bcrypt.compare(password, user.password)
         if (!matchPassword) {
             return res.status(409).json({ message: 'Password is wrong'})
         }
         
-        const token = jwt.sign({ userId: user._id}, process.env.TOKEN_SECRET)
+        const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET)
 
         res.status(200).json({ message: 'Successful Login', token })
 

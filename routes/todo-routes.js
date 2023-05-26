@@ -16,7 +16,7 @@ router.post('/', auth, async (req, res) => {
 
         await todo.save();
 
-        res.status(201).json(todo)
+        res.status(201).json({ message: 'Todo created successfully', data: todo})
 
     } catch (e) {
         res.status(500).json({ message: 'Internal server error' });
@@ -28,7 +28,7 @@ router.get('/', auth, async (req, res) => {
         const userId = req.user.userId
         const todos = await todoModel.find({userId})
 
-        res.status(200).json(todos)
+        res.status(200).json({ message: 'Get all todo successfully', data: todos})
 
     } catch (e) {
         res.status(500).json({ message : e.message })
@@ -46,7 +46,7 @@ router.get('/:id', auth, async (req, res) => {
             res.status(404).json({ message: 'Todo not found' })
         }
 
-        res.status(200).json(todoDetails)
+        res.status(200).json({ message: 'Get detail todo successfully', data: todoDetails})
 
     } catch (e) {
         res.status(500).json({ message: 'Internal server error' })
@@ -69,7 +69,7 @@ router.put('/:id', auth, async (req, res) => {
         updateTodo.description = description
         await updateTodo.save()
 
-        res.status(200).json({ message: 'Todo updated successfully', updateTodo})
+        res.status(200).json({ message: 'Todo updated successfully', data: updateTodo})
         
     } catch (e) {
         res.status(500).json({ message: 'Internal server error' })
